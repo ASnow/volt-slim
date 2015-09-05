@@ -11,6 +11,6 @@ module Volt
     require "volt/slim/sandlebars_generator"
     require "volt/slim/sandlebars_converter"
     require "volt/slim/compiler"
-    require "volt/slim/sprockets/slim_template"
+    require "volt/slim/sprockets/slim_builder"
   end
 end
