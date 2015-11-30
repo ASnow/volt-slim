@@ -3,7 +3,7 @@ module Volt
     module Sprockets
       class SlimBuilder
         def call(html)
-          result = Volt::Slim::Compiler.new(html).build
+          result = Volt::Slim::Compiler.build(html)
           result
         end
       end

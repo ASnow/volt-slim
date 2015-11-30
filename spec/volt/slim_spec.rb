@@ -50,15 +50,44 @@ tpl-template
 SLIM
     expect(html).to eq(<<SBR.gsub(/\n\z/, ''))
 <:Template>
-
-  {{ if true }}
+{{ if true }}
 true
-
-  {{ else }}
+{{ else }}
 false
 
   {{ end }}
 SBR
+  end
+
+  it 'handle white space' do
+    html = Volt::Slim::Compiler.build(<<SLIM)
+.wrap
+  .before-space=< var
+.wrap
+  .after-space=> var
+.wrap
+  .wrap-space=<> var
+.wrap
+  .interpolation \#{ var }
+.wrap
+  | text
+.wrap
+  | \#{ var }
+SLIM
+
+    expect(html).to eq(<<SBR.gsub(/\n\z/, ''))
+<div class="wrap">
+ <div class="before-space">{{ var }}</div></div><div class="wrap">
+<div class="after-space">{{ var }}</div> </div><div class="wrap">
+ <div class="wrap-space">{{ var }}</div> </div><div class="wrap">
+<div class="interpolation">{{  var  }}</div>
+</div><div class="wrap">
+text
+</div><div class="wrap">
+{{  var  }}
+</div>
+SBR
+
   end
 end
 
