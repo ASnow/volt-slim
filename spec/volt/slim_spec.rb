@@ -89,5 +89,48 @@ text
 SBR
 
   end
+
+  # https://github.com/ASnow/volt-slim/issues/3
+  it 'work with each_with_index and submit form' do
+    html = Volt::Slim::Compiler.build(<<SLIM)
+tpl-title Todos
+tpl-body
+
+  h1 Todos
+
+  form e-submit="add_todo" role="form"
+    div.form-group
+      input.form-control type="text" value="\#{ page._name }"
+
+  table.todo-table
+    - page._todos.each_with_index do |todo, index|
+      tr
+        td 
+          = todo._name
+        td
+          button X
+SLIM
+
+    expect(html).to eq(<<SBR.gsub(/\n\z/, ''))
+<:Title>Todos
+<:Body>
+
+<h1>Todos
+</h1>
+<form e-submit="add_todo" role="form">
+<div class="form-group">
+<input class="form-control" type="text" value="{{  page._name  }}" />
+
+</div></form><table class="todo-table">
+{{ page._todos.each_with_index do |todo, index| }}
+<tr>
+<td>
+{{ todo._name }}</td><td>
+<button>X</button>
+</td></tr>
+  {{ end }}</table>
+SBR
+  end
+
 end
 
