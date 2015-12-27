@@ -28,9 +28,9 @@ tpl-title
   | App title
 tpl-body
   | ...
-  use-sucess-alert
+  use-success-alert
   | ...
-tpl-sucess-alert
+tpl-success-alert
   .alert
     Your alert
 ```
@@ -40,9 +40,9 @@ OUT:
   App title
 <:Body>
   ...
-  <:sucess-alert></:sucess-alert>
+  <:success-alert></:success-alert>
   ...
-<:Sucess-alert>
+<:Success-alert>
   .alert
     Your alert
 ```
